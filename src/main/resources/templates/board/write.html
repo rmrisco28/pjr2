@@ -1,29 +1,37 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="layout/main :: commonHead('게시글 작성')">
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+<div th:replace="layout/main :: navbar('write')"></div>
 
-<h3>게시물 작성</h3>
+<div class="container">
 
-<form th:href="@{/board/write}" method="post">
-    <div>
-        <label for="inputTitle">제목</label>
-        <input id="inputTitle" type="text" name="title">
-    </div>
-    <div>
-        <label for="inputContent">내용</label>
-        <textarea id="inputContent" name="content" cols="23" rows="10"></textarea>
-    </div>
-    <div>
-        <label for="inputAuthor">작성자</label>
-        <input id="inputAuthor" name="author" type="text">
-    </div>
-    <div>
-        <button>저장</button>
-    </div>
-</form>
+
+    <h3>게시물 작성</h3>
+
+    <form th:href="@{/board/write}" method="post">
+        <div>
+            <label for="inputTitle">제목</label>
+            <input id="inputTitle" type="text" name="title">
+        </div>
+        <div>
+            <label for="inputContent">내용</label>
+            <textarea id="inputContent" name="content" cols="23" rows="10"></textarea>
+        </div>
+        <div>
+            <label for="inputAuthor">작성자</label>
+            <input id="inputAuthor" name="author" type="text">
+        </div>
+        <div>
+            <button>저장</button>
+        </div>
+    </form>
+</div>
+
+<div th:replace="layout/main :: commonScript"></div>
+
 </body>
 </html>

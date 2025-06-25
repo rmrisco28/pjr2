@@ -30,8 +30,18 @@
         <label for="inputCreated"> 작성일</label>
         <input type="text" id="inputCreated" th:value="${view.created}" readonly>
     </div>
-
 </form>
+<div>
+
+    <form th:action="@{/board/delete}" method="post">
+        <input type="hidden" name="id" th:value="${view.id}">
+        <button type="submit">삭제</button>
+    </form>
+
+    <a th:href="@{/board/edit(id=${view.id})}">
+        <button> 수정</button>
+    </a>
+</div>
 
 </body>
 </html>
