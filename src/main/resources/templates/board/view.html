@@ -1,47 +1,60 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="~{layout/main ::  commonHead('게시물 수정')}">
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-<h3>게시물 보기</h3>
-
-<form th:action="@{/board/view}">
-    <div>
-        <label for="inputId">글 번호</label>
-        <input type="text" id="inputId" th:value="${view.id}" readonly>
-    </div>
-    <div>
-        <label for="inputTitle">제목</label>
-        <input type="text" id="inputTitle" th:value="${view.title}" readonly>
-    </div>
-    <div>
-        <label for="inputContent">내용</label>
-        <textarea id="inputContent" th:text="${view.content}" readonly></textarea>
-    </div>
+<div th:replace="layout/main :: navbar('list')"></div>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col col-lg-6">
 
 
-    <div>
-        <label for="inputAuthor">작성자</label>
-        <input type="text" id="inputAuthor" th:value="${view.author}" readonly>
-    </div>
-    <div>
-        <label for="inputCreated"> 작성일</label>
-        <input type="text" id="inputCreated" th:value="${view.created}" readonly>
-    </div>
-</form>
-<div>
+            <h3 class="mb-3">
+                <span th:text="${view.id}"></span>
+                번 게시물 보기
+            </h3>
 
-    <form th:action="@{/board/delete}" method="post">
-        <input type="hidden" name="id" th:value="${view.id}">
-        <button type="submit">삭제</button>
-    </form>
+            <form th:action="@{/board/view}">
+                <div class="mb-3">
+                    <label for="inputId">글 번호</label>
+                    <input class="form-control" type="text" id="inputId" th:value="${view.id}" readonly>
+                </div>
+                <div class="mb-3">
+                    <label for="inputTitle">제목</label>
+                    <input class="form-control" type="text" id="inputTitle" th:value="${view.title}" readonly>
+                </div>
+                <div class="mb-3">
+                    <label for="inputContent">내용</label>
+                    <textarea class="form-control" id="inputContent" th:text="${view.content}" readonly></textarea>
+                </div>
 
-    <a th:href="@{/board/edit(id=${view.id})}">
-        <button> 수정</button>
-    </a>
+
+                <div class="mb-3">
+                    <label for="inputAuthor">작성자</label>
+                    <input class="form-control" type="text" id="inputAuthor" th:value="${view.author}" readonly>
+                </div>
+                <div class="mb-3">
+                    <label for="inputCreated"> 작성일</label>
+                    <input class="form-control" type="text" id="inputCreated" th:value="${view.created}" readonly>
+                </div>
+            </form>
+            <div>
+                <form class="mb-3 d-inline" th:action="@{/board/delete}" method="post">
+                    <input type="hidden" name="id" th:value="${view.id}">
+                    <button class="btn btn-outline-danger" type="submit">삭제</button>
+                </form>
+
+                <a class="mb-3 d-inline" th:href="@{/board/edit(id=${view.id})}">
+                    <button class="btn btn-outline-warning">수정</button>
+                </a>
+            </div>
+
+        </div>
+    </div>
 </div>
 
+<div th:replace="layout/main :: commonScript"></div>
 </body>
 </html>

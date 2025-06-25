@@ -12,48 +12,51 @@
 <div th:replace="layout/main :: navbar('list')"></div>
 
 <div class="container">
+    <div class="row">
+        <div class="col">
 
-    <h3>게시판 목록</h3>
-    <p th:if="${deleteMessage}" th:text="${deleteMessage}"></p>
-    <p th:if="${update}" th:text="${update}"></p>
+            <h3 class="mb-3">게시판 목록</h3>
+            <p th:if="${deleteMessage}" th:text="${deleteMessage}"></p>
+            <p th:if="${update}" th:text="${update}"></p>
 
-    <table>
-        <thead>
-        <tr>
-            <th>글번호</th>
-            <th>제목</th>
-            <th>작성자</th>
-            <th>작성일</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each=" list : ${boardList}">
-            <td th:text="${list.id}"></td>
-            <td>
-                <a th:href="@{/board/view(id=${list.id})}" th:text="${list.title}"></a>
-            </td>
-            <td th:text="${list.author}"></td>
-            <td th:text="${#temporals.format(list.created,'yyyy-MM-dd HH:mm')}"></td>
-        </tr>
-        </tbody>
-    </table>
-    <!--
-    &lt;!&ndash; 페이지 번호 &ndash;&gt;
-    <div>
-        <span th:if="${startPage>1}">
-            <a th:href="@{'/board/list?page=' + ${startPage - 1}}">이전</a>
-        </span>
+            <table class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>글번호</th>
+                    <th>제목</th>
+                    <th>작성자</th>
+                    <th>작성일</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each=" list : ${boardList}">
+                    <td th:text="${list.id}"></td>
+                    <td>
+                        <a th:href="@{/board/view(id=${list.id})}" th:text="${list.title}"></a>
+                    </td>
+                    <td th:text="${list.author}"></td>
+                    <td th:text="${#temporals.format(list.created,'yyyy-MM-dd HH:mm')}"></td>
+                </tr>
+                </tbody>
+            </table>
+            <!--
+            &lt;!&ndash; 페이지 번호 &ndash;&gt;
+            <div>
+                <span th:if="${startPage>1}">
+                    <a th:href="@{'/board/list?page=' + ${startPage - 1}}">이전</a>
+                </span>
 
-        <span th:each="i : ${#numbers.sequence(startPage,endPage)}">
-            <a th:href="@{'/board/list?page=' + ${i}}"
-               th:text="${i}"
-               th:classappend="${i == currentPage} ? 'activ'">페이지</a>
-        </span>
-        <span th:if=" ${endPage <boardPage.totalPages}">
-            <a th:href="@{'/board/list?page=' + ${endPage + 1}}">다음</a>
-        </span>
-    </div>--> <!--TODO-->
-
+                <span th:each="i : ${#numbers.sequence(startPage,endPage)}">
+                    <a th:href="@{'/board/list?page=' + ${i}}"
+                       th:text="${i}"
+                       th:classappend="${i == currentPage} ? 'activ'">페이지</a>
+                </span>
+                <span th:if=" ${endPage <boardPage.totalPages}">
+                    <a th:href="@{'/board/list?page=' + ${endPage + 1}}">다음</a>
+                </span>
+            </div>--> <!--TODO-->
+        </div>
+    </div>
 </div>
 <div th:replace="layout/main :: commonScript"></div>
 

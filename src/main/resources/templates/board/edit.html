@@ -1,34 +1,57 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="~{layout/main ::  commonHead('게시물 수정')}">
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        input[readonly] {
+            background-color: #000000;
+            cursor: not-allowed;
+        }
+    </style>
 </head>
 <body>
-<h3>게시물 수정</h3>
-<form th:action="@{/board/edit}" method="post">
+<div th:replace="layout/main :: navbar('list')"></div>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col col-lg-6">
+            <h3>게시물 수정</h3>
+            <form th:action="@{/board/edit}" method="post">
 
-    <div>
-        <label for="inputId">글 번호</label>
-        <input type="text" id="inputId" name="id" th:value="${board.id}" readonly>
-    </div>
-    <div>
-        <label for="inputTitle">제목</label>
-        <input type="text" id="inputTitle" name="title" th:value="${board.title}">
-    </div>
-    <div>
-        <label for="inputContent">내용</label>
-        <textarea type="text" id="inputContent" name="content" th:text="${board.content}"></textarea>
-    </div>
-    <div>
-        <label for="inputAuthor">작성자</label>
-        <input type="text" id="inputAuthor" name="author" th:value="${board.author}" readonly>
-    </div>
-    <button type="submit">저장</button>
-</form>
+                <div class="mb-3">
+                    <label for="inputId">글 번호</label>
+                    <input class="form-control" type="text" id="inputId" name="id" th:value="${board.id}"
+                           aria-label="Disabled input example" readonly>
+                </div>
+                <div class="mb-3">
+                    <label for="inputTitle">제목</label>
+                    <input class="form-control" type="text" id="inputTitle" name="title" th:value="${board.title}">
+                </div>
+                <div class="mb-3">
+                    <label for="inputContent">내용</label>
+                    <textarea class="form-control" type="text" id="inputContent" name="content"
+                              th:text="${board.content}"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="inputAuthor">작성자</label>
+                    <input class="form-control" type="text" id="inputAuthor" name="author" th:value="${board.author}"
+                           aria-label="Disabled input example" readonly>
+                </div>
+                <button class="btn btn-outline-success mb-3" type="submit">저장</button>
+            </form>
+            <div class="d-flex justify-content-start gap-2">
+                <a th:href="@{/board/view(id=${board.id})}">
+                    <button class="btn btn-outline-warning"> 뒤로</button>
+                </a>
+                <!--TODO-->
+                <a th:href="@{/board/list}">
+                    <button class="btn btn-outline-secondary"> 목록으로</button>
+                </a>
+            </div>
 
-<a th:href="@{/board/list}">
-    <button> 목록으로</button>
-</a>
+        </div>
+    </div>
+</div>
+<div th:replace="layout/main :: commonScript"></div>
 </body>
 </html>
