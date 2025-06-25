@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+
+    </style>
+</head>
+<body>
+<h3>게시판 목록</h3>
+<table border="1">
+    <thead>
+    <tr>
+        <th>글번호</th>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>작성일</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each=" list : ${boardList}">
+        <td th:text="${list.id}"></td>
+        <td th:text="${list.title}"></td>
+        <td th:text="${list.author}"></td>
+        <td th:text="${#temporals.format(list.created,'yyyy-MM-dd HH:mm')}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<!-- 페이지 번호 -->
+
+</body>
+</html>

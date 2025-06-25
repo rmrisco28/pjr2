@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3>게시물 보기</h3>
+
+<form th:action="@{/board/view}">
+    <div>
+        <label for="inputId">글 번호</label>
+        <input type="text" id="inputId" th:value="${view.id}" readonly>
+    </div>
+    <div>
+        <label for="inputTitle">제목</label>
+        <input type="text" id="inputTitle" th:value="${view.title}" readonly>
+    </div>
+    <div>
+        <label for="inputContent">내용</label>
+        <textarea id="inputContent" th:text="${view.content}" readonly></textarea>
+    </div>
+
+
+    <div>
+        <label for="inputAuthor">작성자</label>
+        <input type="text" id="inputAuthor" th:value="${view.author}" readonly>
+    </div>
+    <div>
+        <label for="inputCreated"> 작성일</label>
+        <input type="text" id="inputCreated" th:value="${view.created}" readonly>
+    </div>
+
+</form>
+
+</body>
+</html>
