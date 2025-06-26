@@ -16,8 +16,8 @@
         <div class="col">
 
             <h3 class="mb-3">게시판 목록</h3>
-            <p th:if="${deleteMessage}" th:text="${deleteMessage}"></p>
-            <p th:if="${update}" th:text="${update}"></p>
+            <p th:if="${deleteMessage}" class="alert alert-danger" th:text="${deleteMessage}"></p>
+            <p th:if="${joinSuccess}" class="alert alert-primary" th:text="${joinSuccess}"></p>
 
             <table class="table table-striped table-hover">
                 <thead>
@@ -39,25 +39,36 @@
                 </tr>
                 </tbody>
             </table>
-            <!--
-            &lt;!&ndash; 페이지 번호 &ndash;&gt;
-            <div>
-                <span th:if="${startPage>1}">
-                    <a th:href="@{'/board/list?page=' + ${startPage - 1}}">이전</a>
-                </span>
 
-                <span th:each="i : ${#numbers.sequence(startPage,endPage)}">
-                    <a th:href="@{'/board/list?page=' + ${i}}"
-                       th:text="${i}"
-                       th:classappend="${i == currentPage} ? 'activ'">페이지</a>
-                </span>
-                <span th:if=" ${endPage <boardPage.totalPages}">
-                    <a th:href="@{'/board/list?page=' + ${endPage + 1}}">다음</a>
-                </span>
-            </div>--> <!--TODO-->
+            <!--페이지 번호-->
+
+            <div class="mt-4">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item" th:if="${leftPageNumber >1}">
+                            <a class="page-link" th:href="@{'/board/list?page=' + ${leftPageNumber -1}}">이전</a>
+                        </li>
+
+                        <li class="page-item" th:if="${leftPageNumber != null and rightPageNumber != null}"
+                            th:each="i : ${#numbers.sequence(leftPageNumber, rightPageNumber)}">
+                            <a class="page-link" th:href="@{'/board/list?page=' + ${i}}"
+                               th:text="${i}"
+                               th:classappend="${i == currentPage}? 'fw-boad text-primary'"></a>
+                        </li>
+
+                        <li class="page-item" th:if="${rightPageNumber < totalPage}">
+                            <a class="page-link" th:href="@{'/board/list?page=' + ${rightPageNumber +1}}">다음</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+
         </div>
     </div>
 </div>
+
+
 <div th:replace="layout/main :: commonScript"></div>
 
 </body>

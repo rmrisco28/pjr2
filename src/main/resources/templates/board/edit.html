@@ -3,20 +3,17 @@
 <head th:replace="~{layout/main ::  commonHead('게시물 수정')}">
     <meta charset="UTF-8">
     <title>Title</title>
-    <style>
-        input[readonly] {
-            background-color: #000000;
-            cursor: not-allowed;
-        }
-    </style>
+
 </head>
 <body>
-<div th:replace="layout/main :: navbar('list')"></div>
+<div th:replace="layout/main :: navbar('edit')"></div>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col col-lg-6">
+
+
             <h3>게시물 수정</h3>
-            <form th:action="@{/board/edit}" method="post">
+            <form th:action="@{/board/edit}" method="post" id="editForm">
 
                 <div class="mb-3">
                     <label for="inputId">글 번호</label>
@@ -37,21 +34,88 @@
                     <input class="form-control" type="text" id="inputAuthor" name="author" th:value="${board.author}"
                            aria-label="Disabled input example" readonly>
                 </div>
-                <button class="btn btn-outline-success mb-3" type="submit">저장</button>
-            </form>
-            <div class="d-flex justify-content-start gap-2">
-                <a th:href="@{/board/view(id=${board.id})}">
-                    <button class="btn btn-outline-warning"> 뒤로</button>
-                </a>
-                <!--TODO-->
-                <a th:href="@{/board/list}">
-                    <button class="btn btn-outline-secondary"> 목록으로</button>
-                </a>
-            </div>
 
+
+                <div class="mb-3 ">
+                    <a class="btn btn-outline-primary"
+                       th:href="@{/board/list}">
+                        목록
+                    </a>
+
+                    <!--                <a class="btn btn-outline-warning"-->
+                    <!--                   th:href="@{/board/view(id=${board.id})}">-->
+                    <!--                    뒤로-->
+                    <!--                </a>-->
+                    <button type="button"
+                            class="btn btn-outline-warning"
+                            data-bs-toggle="modal"
+                            data-bs-target="#backModal">
+                        뒤로
+                    </button>
+
+                    <!-- 수정 버튼: 모달 띄움 -->
+                    <button type="button"
+                            class="btn btn-outline-success"
+                            data-bs-toggle="modal"
+                            data-bs-target="#editModal">
+                        저장
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
+
 <div th:replace="layout/main :: commonScript"></div>
+
+<!-- 뒤로 이동 확인 모달 -->
+<div class="modal fade" id="backModal" tabindex="-1" aria-labelledby="backModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form th:action="@{/board/view(id=${board.id})}">
+                <input type="hidden" name="id" th:value="${board.id}">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="backModalLabel">수정 확인</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="닫기"></button>
+                </div>
+                <div class="modal-body">
+                    저장하지 않고 돌아가시겠습니까?
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-warning">네</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">아니요</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- 수정 확인 모달 -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <input type="hidden" name="id" th:value="${board.id}">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">수정 확인</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="닫기"></button>
+            </div>
+            <div class="modal-body">
+                정말로
+                <strong th:text="${board.id}"></strong>
+                번 게시물을 저장하시겠습니까?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success"
+                        onclick="document.getElementById('editForm').submit();">
+                    저장
+                </button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
+
+
 </html>

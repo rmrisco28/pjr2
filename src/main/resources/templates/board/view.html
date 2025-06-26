@@ -5,11 +5,12 @@
     <title>Title</title>
 </head>
 <body>
-<div th:replace="layout/main :: navbar('list')"></div>
+<div th:replace="layout/main :: navbar('view')"></div>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col col-lg-6">
 
+            <p th:if="${update}" class="alert alert-success" th:text="${update}"></p>
 
             <h3 class="mb-3">
                 <span th:text="${view.id}"></span>
@@ -37,18 +38,24 @@
                 </div>
                 <div class="mb-3">
                     <label for="inputCreated"> 작성일</label>
-                    <input class="form-control" type="text" id="inputCreated" th:value="${view.created}" readonly>
+                    <input th:value="${#temporals.format(view.created,'yyyy-MM-dd HH:mm')}"
+                           class="form-control" type="text" id="inputCreated" readonly>
                 </div>
             </form>
-            <div>
-                <form class="mb-3 d-inline" th:action="@{/board/delete}" method="post">
-                    <input type="hidden" name="id" th:value="${view.id}">
-                    <button class="btn btn-outline-danger" type="submit">삭제</button>
-                </form>
+            <div class="mb-3">
+                <!-- 목록 버튼 -->
+                <a th:href="@{'/board/list?page=' + ${page}}" class="btn btn-outline-primary">목록</a>
 
-                <a class="mb-3 d-inline" th:href="@{/board/edit(id=${view.id})}">
-                    <button class="btn btn-outline-warning">수정</button>
-                </a>
+                <!-- 삭제 버튼: 모달 띄움 -->
+                <button type="button"
+                        class="btn btn-outline-danger"
+                        data-bs-toggle="modal"
+                        data-bs-target="#deleteModal">
+                    삭제
+                </button>
+
+                <!-- 수정 버튼 -->
+                <a th:href="@{/board/edit(id=${view.id})}" class="btn btn-outline-warning">수정</a>
             </div>
 
         </div>
@@ -56,5 +63,31 @@
 </div>
 
 <div th:replace="layout/main :: commonScript"></div>
+
+
+<!-- 삭제 확인 모달 -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form th:action="@{/board/delete}" method="post">
+                <input type="hidden" name="id" th:value="${view.id}">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">삭제 확인</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="닫기"></button>
+                </div>
+                <div class="modal-body">
+                    정말로
+                    <strong th:text="${view.id}"></strong>
+                    번 게시물을 삭제하시겠습니까?
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger">네, 삭제합니다</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">아니요</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>

@@ -8,28 +8,38 @@
 <div th:replace="layout/main :: navbar('write')"></div>
 
 <div class="container">
+    <div class="row justify-content-center">
+        <div class="col col-lg-6">
+            <!--에러메시지 출력-->
+            <p th:if="${error}" class="alert alert-danger" th:text="${error}"></p>
 
+            <h3 class="mb-3">게시물 작성</h3>
 
-    <h3>게시물 작성</h3>
-
-    <form th:href="@{/board/write}" method="post">
-        <div>
-            <label for="inputTitle">제목</label>
-            <input id="inputTitle" type="text" name="title">
+            <form th:action="@{/board/write}" method="post">
+                <div class="mb-3">
+                    <label for="inputTitle">제목</label>
+                    <input class="form-control" id="inputTitle" type="text" name="title"
+                           th:value="${boardDto != null ? boardDto.title : ''}">
+                </div>
+                <div class="mb-3">
+                    <label for="inputContent">내용</label>
+                    <textarea class="form-control" id="inputContent" name="content" cols="23" rows="10"
+                              th:text="${boardDto != null ? boardDto.content : ''}"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="inputAuthor">작성자</label>
+                    <input class="form-control" id="inputAuthor" name="author" type="text"
+                           th:value="${boardDto != null ? boardDto.author : ''}">
+                </div>
+                <div class="mb-3">
+                    <a th:href="@{/board/list}" class="btn btn-outline-primary">목록</a>
+                    <button class="btn btn-outline-success">저장</button>
+                </div>
+            </form>
         </div>
-        <div>
-            <label for="inputContent">내용</label>
-            <textarea id="inputContent" name="content" cols="23" rows="10"></textarea>
-        </div>
-        <div>
-            <label for="inputAuthor">작성자</label>
-            <input id="inputAuthor" name="author" type="text">
-        </div>
-        <div>
-            <button>저장</button>
-        </div>
-    </form>
+    </div>
 </div>
+
 
 <div th:replace="layout/main :: commonScript"></div>
 
