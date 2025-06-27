@@ -16,6 +16,10 @@ ALTER TABLE board
 
 DROP TABLE board;
 
+SELECT *
+FROM board;
+
+
 INSERT INTO board
     (title, content, author)
 SELECT title, content, author
@@ -33,14 +37,15 @@ WHERE content = "";
 # 멤버 테이블
 CREATE TABLE member
 (
-    id                   VARCHAR(255) NOT NULL,
-    password             VARCHAR(255) NOT NULL,
-    password_duplication VARCHAR(255) NOT NULL,
-    name                 VARCHAR(255) NOT NULL,
-    nickname             VARCHAR(255) NOT NULL,
-    registration_date    DATETIME     NOT NULL DEFAULt NOW(),
+    id                VARCHAR(255) NOT NULL,
+    password          VARCHAR(255) NOT NULL,
+    name              VARCHAR(255) NOT NULL,
+    nickname          VARCHAR(255) NOT NULL,
+    registration_date DATETIME     NOT NULL DEFAULt CURRENT_TIMESTAMP(),
     CONSTRAINT pk_member PRIMARY KEY (id)
 );
+
+
 
 SELECT *
 FROM member;

@@ -1,12 +1,13 @@
-package com.example.prj2.board.user.dto;
+package com.example.prj2.user.dto;
 
+import com.example.prj2.user.entity.User;
 import lombok.Value;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * DTO for {@link com.example.prj2.board.user.entity.User}
+ * DTO for {@link User}
  */
 @Value
 public class UserDto implements Serializable {

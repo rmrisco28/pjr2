@@ -37,12 +37,31 @@
                         게시글 작성
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/user/signUp}"
-                       th:classappend="${current == 'join'} ? 'active'">
-                        회원가입
+                <li class="nav-item" th:if="${session.login == null}">
+                    <a class="nav-link" th:href="@{/member/signup}"
+                       th:classappend="${current == 'signup'} ? 'active'">
+                        회원 가입
                     </a>
                 </li>
+                <li class="nav-item" th:if="${session.login != null}">
+                    <a class="nav-link" th:href="@{/member/memberList}"
+                       th:classappend="${current == 'memberList'} ? 'active'">
+                        회원 조회
+                    </a>
+                </li>
+                <li class="nav-item" th:if="${session.login == null}">
+                    <a class="nav-link" th:href="@{/member/login}"
+                       th:classappend="${current == 'login'} ? 'active'">
+                        로그인
+                    </a>
+                </li>
+                <li class="nav-item" th:if="${session.login != null}">
+                    <a class="nav-link" th:href="@{/member/logout}"
+                       th:classappend="${current == 'logout'} ? 'active'">
+                        로그아웃
+                    </a>
+                </li>
+
             </ul>
         </div>
     </div>

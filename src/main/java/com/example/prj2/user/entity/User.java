@@ -1,28 +1,25 @@
-package com.example.prj2.member.entity;
+package com.example.prj2.user.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.hibernate.annotations.CreationTimestamp;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
 @Getter
 @Setter
 @ToString
-@Table(name = "member")
-public class Member {
+@Table(name = "user")
+public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
+
     private String password;
-    private String passwordDuplication;
     private String name;
     private String nickname;
 
-    @CreationTimestamp
+    @Column(name = "registration_date", insertable = false, updatable = false)
     private LocalDateTime registrationDate;
 }

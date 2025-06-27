@@ -1,8 +1,8 @@
-package com.example.prj2.board.user.service;
+package com.example.prj2.user.service;
 
-import com.example.prj2.board.user.dto.UserDto;
-import com.example.prj2.board.user.entity.User;
-import com.example.prj2.board.user.repository.UserRepository;
+import com.example.prj2.user.dto.UserDto;
+import com.example.prj2.user.entity.User;
+import com.example.prj2.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

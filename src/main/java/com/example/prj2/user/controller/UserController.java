@@ -1,7 +1,7 @@
-package com.example.prj2.board.user.controller;
+package com.example.prj2.user.controller;
 
-import com.example.prj2.board.user.dto.UserDto;
-import com.example.prj2.board.user.service.UserService;
+import com.example.prj2.user.dto.UserDto;
+import com.example.prj2.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/main ::  commonHead('회원 정보')}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:replace="layout/main :: navbar('info')"></div>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col col-lg-6">
+            <p th:if="${update}" class="alert alert-success" th:text="${update}"></p>
+            <h3>회원 정보</h3>
+            <form th:action="@{/member/info}">
+                <div class="mb-3">
+                    <label for="inputId">아이디</label>
+                    <input type="text" class="form-control" id="inputId" readonly
+                           th:value="${memberDto.id}">
+                </div>
+                <div class="mb-3">
+                    <label for="inputName">이름</label>
+                    <input type="text" class="form-control" id="inputName" readonly
+                           th:value="${memberDto.name}">
+                </div>
+                <div class="mb-3">
+                    <label for="inputNickname">별명</label>
+                    <input type="text" class="form-control" id="inputNickname" readonly
+                           th:value="${memberDto.nickname}">
+                </div>
+                <div class="mb-3">
+                    <label for="inputRegistration">가입일자</label>
+                    <input type="text" class="form-control" id="inputRegistration" readonly
+                           th:value="${#temporals.format(memberDto.registrationDate,'yyyy-MM-dd HH:mm:ss')}">
+                </div>
+                <div class="mb-3">
+                    <a th:href="@{/member/memberList}" class="btn btn-outline-primary">목록</a>
+                    <!-- 삭제 버튼: 모달 띄움 -->
+                    <button type="button"
+                            class="btn btn-outline-danger"
+                            data-bs-toggle="modal"
+                            data-bs-target="#deleteModal">
+                        탈퇴
+                    </button>
+                    <a th:href="@{/member/edit(id=${memberDto.id})}" class="btn btn-outline-success">수정</a>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+
+<div th:replace="layout/main :: commonScript"></div>
+<!-- 삭제 확인 모달 -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form th:action="@{/member/delete}" method="post">
+                <input type="hidden" name="id" th:value="${memberDto.id}">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">탈퇴 확인</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="닫기"></button>
+                </div>
+                <div class="modal-body">
+                    정말로 회원을 탈퇴하시겠습니까?
+                    <!--                    <strong th:text="${memberDto.id}"></strong>-->
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger">네, 탈퇴합니다</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">아니요</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

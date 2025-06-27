@@ -1,6 +1,6 @@
-package com.example.prj2.board.user.repository;
+package com.example.prj2.user.repository;
 
-import com.example.prj2.board.user.entity.User;
+import com.example.prj2.user.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
